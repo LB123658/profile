@@ -105,6 +105,13 @@ cursor: pointer;
 .post p {
 font-size: 15px;
 }
+.post a {
+color: grey;
+text-decoration: none;
+}
+.post a:hover {
+text-decoration: underline;
+}
 .postcontrols {
 width: 100%;
 text-align: center;
@@ -129,11 +136,13 @@ text-decoration: underline;
 <body>
 <!-- top section -->
 <div id="top">
-<button>Flapjack</button>
+<a href="https://lb123658.github.io/socialmedia">
+<button>Flapjack</button></a>
 <button class="round right off"><span class="material-icons">settings</span></button>
 <button class="round right off"><span class="material-icons">bookmark</span></button>
 <button class="round right off"><span class="material-icons">edit</span></button>
-<button class="round right"><span class="material-icons">home</span></button>
+<a href="https://lb123658.github.io/socialmedia">
+<button class="round right"><span class="material-icons">home</span></button></a>
 </div>
 
 <!-- stream section -->
@@ -175,7 +184,19 @@ content.innerHTML = "<h2>" + user + "</h2><br><p>" + caption + "</p><br><div cla
 stream.appendChild(content);
 }
 post("@Daily_Post",message);
+advertize();
 
+// generate random posts
+function generate() {
+var x = (Math.random() * 10);
+post("@" + x,"Hello, follow me at <a href='https://lb123658.github.io/socialmedia/profile/" + x + "'>" + " https://lb123658.github.io/socialmedia/profile/" + x + "</a>");
+}
+function advertize() {
+var y = (Math.random() * 100);
+post("Ad: " + y,"Buy some stuff at <a href='https://" + y + ".com'>" + " https://" + y + ".com</a>");
+}
+setInterval(generate, 500);
+setInterval(advertize, 1000);
 </script>
 </body>
 </html>
