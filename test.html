@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Flapjack</title>
+<base href="https://lb123658.github.io"></base>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+<link rel='icon' href='https://lb123658.github.io/galaxy/favicon.png' type='image/png'/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+<style>
+body {
+background: white;
+overflow-x: hidden;
+}
+* {
+font-family: 'Open Sans', sans-serif;
+user-select: none;
+-webkit-user-select: none;
+}
+input {
+-webkit-user-select: auto;
+}
+:focus {
+outline: none;
+}
+a {
+color: grey;
+text-decoration: none;
+font-size: 15px;
+cursor: pointer;
+}
+p button {
+font-size: 15px;
+}
+#top {
+position: fixed;
+top: 0px;
+left: 0px;
+width: 100%;
+height: 80px;
+background-image: linear-gradient(to right, red,orange,yellow);
+z-index: 1;
+}
+#logo {
+position: absolute;
+top: 13px;
+left: 13px;
+height: 40px;
+width: 40px;
+background: transparent;
+border: 6px solid white;
+border-radius: 50%;
+cursor: pointer;
+transition: background 0.3s;
+}
+#logo:hover {
+background: white;
+}
+#reload {
+position: absolute;
+top: 15px;
+left: 80px;
+height: 50px;
+background: transparent;
+border: none;
+color: white;
+font-size: 30px;
+cursor: pointer;
+}
+#buttons {
+position: absolute;
+top: 15px;
+left: 50%;
+margin-left: -100px;
+width: 200px;
+height: 50px;
+display: flex;
+overflow: hidden;
+background: rgba(0, 0, 0, 0.2);
+border-radius: 5px;
+}
+#buttons svg {
+padding: 5px 13.3px;
+cursor: pointer;
+}
+@media screen and (max-width: 650px) {
+  #buttons {
+    margin-left: 0px;
+    left: 55%;
+  }
+}
+#stream {
+position: fixed;
+top: 100px;
+left: 50%;
+width: 600px;
+margin-left: -300px;
+overflow: auto;
+}
+#stream::-webkit-scrollbar {
+display: none;
+}
+.post {
+border: 2px solid black;
+margin: 10px 0px;
+}
+.post h2,p {
+margin: 10px;
+}
+.post button {
+background: transparent;
+border: 1px solid black;
+margin: 10px;
+}
+</style>
+</head>
+<body>
+<div id="top">
+<div id="logo" onclick="location.reload()"></div>
+<button id="reload" onclick="location.reload()">Flapjack</button>
+
+<div id="buttons">
+<svg height="40" width="40" viewBox="0 0 24 24" style="fill:white;"><path d="M21 22V7.174l-9.001-5.195L3 7.214V22h7v-7h4v7z"></path></svg>
+
+<svg height="40" width="40" viewBox="0 0 24 24" style="fill:white;"><path d="M14.617 3.893l-1.827.814 7.797 17.513 1.827-.813-7.797-17.514zM3 22h2V4H3v18zm5 0h2V4H8v18z"></path></svg>
+
+<svg height="40" width="40" viewBox="0 0 24 24" style="fill:white;"><path d="M16.736 16.262A8.457 8.457 0 0019 10.5a8.5 8.5 0 10-3.779 7.067l4.424 5.18 1.521-1.299-4.43-5.186zM10.5 17C6.916 17 4 14.084 4 10.5S6.916 4 10.5 4 17 6.916 17 10.5 14.084 17 10.5 17z"></path></svg>
+</div>
+</div>
+
+<div id="stream"></div>
+
+<script>
+var stream = document.getElementById("stream");
+
+// set stream height so it fits the screen
+stream.style.height = (window.innerHeight - 100) + "px";
+document.body.onresize = function() {stream.style.height = (window.innerHeight - 100) + "px";};
+
+// find what day it is
+var d = new Date();
+var n = d.getDay()
+if (n == 5) {
+message = "Happy Friday!";
+} else if (n == 1) {
+message = "Happy Monday!";
+}  else if (n == 2) {
+message = " Happy Tuesday!";
+} else if (n == 3) {
+message = "Happy Wednesday!";
+} else if (n == 4) {
+message = "Happy Thursday!";
+} else if (n == 6) {
+message = "Happy Saturday!";
+} else if (n == 0) {
+message = "Happy Sunday!";
+}
+
+// create a post
+function post(user,caption) {
+var content = document.createElement("div");
+content.className = "post";
+content.innerHTML = "<h2>" + user + "</h2><br><p>" + caption + "</p><br><div class='postcontrols'><button onclick='this.innerHTML=\"Liked\";this.style.color=\"white\";this.style.background=\"black\";'>Like</button> <button>Get link</button> <button>Save</button></div>";
+stream.appendChild(content);
+}
+post("@Daily_Post",message);
+advertize();
+
+// generate random posts
+function generate() {
+var x = (Math.random() * 10);
+post("@" + x,"Hello, follow me at <a href='https://lb123658.github.io/socialmedia/profile/" + x + "'>" + " https://lb123658.github.io/socialmedia/profile/" + x + "</a>");
+}
+function advertize() {
+var y = (Math.random() * 100);
+post("Ad: " + y,"Buy some stuff at <a href='https://" + y + ".com'>" + " https://" + y + ".com</a>");
+}
+setInterval(generate, 500);
+setInterval(advertize, 1000);
+</script>
+</body>
+</html>
