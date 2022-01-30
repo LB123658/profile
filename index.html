@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Flapjack</title>
-<base href="https://lb123658.github.io"></base>
+<title>Profile</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
@@ -90,94 +89,143 @@ cursor: pointer;
     left: 55%;
   }
 }
-#stream {
+#icon {
 position: fixed;
 top: 100px;
 left: 50%;
-width: 600px;
-margin-left: -300px;
-overflow: auto;
+margin-left: -100px;
+width: 200px;
+height: 200px;
+border-radius: 50%;
+border: 5px solid black;
+overflow: hidden;
 }
-#stream::-webkit-scrollbar {
-display: none;
+#head {
+position: absolute;
+top: 20px;
+left: 50%;
+width: 100px;
+height: 100px;
+height: 100px;
+margin-left: -50px;
+border-radius: 50%;
+background: black;
 }
-.post {
+#neck {
+position: absolute;
+top: 140px;
+left: 50%;
+width: 160px;
+height: 60px;
+margin-left: -80px;
+background: black;
+border-radius: 20px;
+}
+#info {
+position: absolute;
+top: 340px;
+left: 20%;
+width: 60%;
+text-align: center;
+min-height: 100px;
+border-radius: 0px;
 border: 2px solid black;
-margin: 10px 0px;
 }
-.post h2,p {
-margin: 10px;
+#info * {
+color: black;
+margin: 15px 0px;
 }
-.post button {
-background: transparent;
-border: 1px solid black;
-margin: 10px;
+#info a {
+text-decoration: none;
+color: black;
+}
+#info a:hover {
+cursor: pointer;
+text-decoration: underline;
+color: black;
+}
+#info h2 p span {
+color: black;
 }
 </style>
 </head>
 <body>
 <div id="top">
-<div id="logo" onclick="location.reload()"></div>
-<button id="reload" onclick="location.reload()">Flapjack</button>
+<a href="https://lb123658.github.io/profile">
+<div id="logo"></div></a>
+<a href="https://lb123658.github.io/profile">
+<button id="reload">Profile</button></a>
+
+<!-- profile -->
+<div id="icon">
+  <div id="head"></div>
+  <div id="neck"></div>
+</div>
+
+<div id="info">
+<h2>Username</h2>
+<p>Bio</p>
+  <a target="_blank">Website</a>
+  <br>
+  <br>
+  <a target="_blank">Email</a>
+  <br>
+  <br>
+  <a target="_blank">Phone</a>
+  <br><br>
+</div>
 
 <div id="buttons">
-<svg height="40" width="40" viewBox="0 0 24 24" style="fill:white;"><path d="M21 22V7.174l-9.001-5.195L3 7.214V22h7v-7h4v7z"></path></svg>
+<a href="https://lb123658.github.io/profile">
+<svg height="40" width="40" viewBox="0 0 24 24" style="fill:white;"><path d="M21 22V7.174l-9.001-5.195L3 7.214V22h7v-7h4v7z"></path></svg></a>
 
-<svg height="40" width="40" viewBox="0 0 24 24" style="fill:white;"><path d="M14.617 3.893l-1.827.814 7.797 17.513 1.827-.813-7.797-17.514zM3 22h2V4H3v18zm5 0h2V4H8v18z"></path></svg>
+<a href="https://lb123658.github.io/profile/edit">
+<svg height="40" width="40" viewBox="0 0 24 24" style="fill:rgba(0, 0, 0, 0.6);"><path d="M14.617 3.893l-1.827.814 7.797 17.513 1.827-.813-7.797-17.514zM3 22h2V4H3v18zm5 0h2V4H8v18z"></path></svg></a>
 
-<svg height="40" width="40" viewBox="0 0 24 24" style="fill:white;"><path d="M16.736 16.262A8.457 8.457 0 0019 10.5a8.5 8.5 0 10-3.779 7.067l4.424 5.18 1.521-1.299-4.43-5.186zM10.5 17C6.916 17 4 14.084 4 10.5S6.916 4 10.5 4 17 6.916 17 10.5 14.084 17 10.5 17z"></path></svg>
+<svg height="40" width="40" viewBox="0 0 24 24" style="fill:rgba(0, 0, 0, 0.6);"><path d="M16.736 16.262A8.457 8.457 0 0019 10.5a8.5 8.5 0 10-3.779 7.067l4.424 5.18 1.521-1.299-4.43-5.186zM10.5 17C6.916 17 4 14.084 4 10.5S6.916 4 10.5 4 17 6.916 17 10.5 14.084 17 10.5 17z"></path></svg>
 </div>
 </div>
 
-<div id="stream"></div>
 
 <script>
-var stream = document.getElementById("stream");
+var usernameText = document.getElementsByTagName("h2")[0];
+var bioText = document.getElementsByTagName("p")[0];
+var linkText = document.getElementsByTagName("a")[2];
+var emailText = document.getElementsByTagName("a")[3];
+var phoneText = document.getElementsByTagName("a")[4];
 
-// set stream height so it fits the screen
-stream.style.height = (window.innerHeight - 100) + "px";
-document.body.onresize = function() {stream.style.height = (window.innerHeight - 100) + "px";};
+var info = document.getElementById("info");
 
-// find what day it is
-var d = new Date();
-var n = d.getDay()
-if (n == 5) {
-message = "Happy Friday!";
-} else if (n == 1) {
-message = "Happy Monday!";
-}  else if (n == 2) {
-message = " Happy Tuesday!";
-} else if (n == 3) {
-message = "Happy Wednesday!";
-} else if (n == 4) {
-message = "Happy Thursday!";
-} else if (n == 6) {
-message = "Happy Saturday!";
-} else if (n == 0) {
-message = "Happy Sunday!";
+function save() {
+localStorage.setItem("web_profile",username.value + ":::" + bio.value + ":::" + link.value + ":::" + email.value + ":::" + phone.value);
+info.style.visibility = "hidden";
 }
+function edit() {
+info.style.visibility = "visible";
+}
+if (localStorage.getItem("web_profile")) {
+var userInfo = localStorage.getItem("web_profile");
+usernameText.innerHTML = userInfo.split(":::")[0];
+bioText.innerHTML = userInfo.split(":::")[1].split(":::")[0];
+linkText.innerHTML = userInfo.split(":::")[2].split(":::")[0];
+emailText.innerHTML = userInfo.split(":::")[3].split(":::")[0];
+phoneText.innerHTML = userInfo.split(":::")[4].split(":::")[0];
 
-// create a post
-function post(user,caption) {
-var content = document.createElement("div");
-content.className = "post";
-content.innerHTML = "<h2>" + user + "</h2><br><p>" + caption + "</p><br><div class='postcontrols'><button onclick='this.innerHTML=\"Liked\";this.style.color=\"white\";this.style.background=\"black\";'>Like</button> <button>Get link</button> <button>Save</button></div>";
-stream.appendChild(content);
-}
-post("@Daily_Post",message);
-advertize();
+linkText.href = linkText.innerHTML = userInfo.split(":::")[2].split(":::")[0];
+emailText.href = "mailto:" + userInfo.split(":::")[3].split(":::")[0];
+phoneText.href = "tel:" + userInfo.split(":::")[4].split(":::")[0];
+} else {
+var userInfo = location.search.split("user=")[1];
+usernameText.innerHTML = userInfo.split(":::")[0];
+bioText.innerHTML = userInfo.split(":::")[1].split(":::")[0];
+linkText.innerHTML = userInfo.split(":::")[2].split(":::")[0];
+emailText.innerHTML = userInfo.split(":::")[3].split(":::")[0];
+phoneText.innerHTML = userInfo.split(":::")[4].split(":::")[0];
 
-// generate random posts
-function generate() {
-var x = (Math.random() * 10);
-post("@" + x,"Hello, follow me at <a href='https://lb123658.github.io/socialmedia/profile/" + x + "'>" + " https://lb123658.github.io/socialmedia/profile/" + x + "</a>");
-}
-function advertize() {
-var y = (Math.random() * 100);
-post("Ad: " + y,"Buy some stuff at <a href='https://" + y + ".com'>" + " https://" + y + ".com</a>");
-}
-setInterval(generate, 500);
-setInterval(advertize, 1000);
+linkText.href = linkText.innerHTML = userInfo.split(":::")[2].split(":::")[0];
+emailText.href = "mailto:" + userInfo.split(":::")[3].split(":::")[0];
+phoneText.href = "tel:" + userInfo.split(":::")[4].split(":::")[0];
+} 
 </script>
 </body>
 </html>
