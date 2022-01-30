@@ -216,8 +216,8 @@ emailText.href = "mailto:" + userInfo.split(":::")[3].split(":::")[0];
 phoneText.href = "tel:" + userInfo.split(":::")[4].split(":::")[0];
 } else {
 var userInfo = location.search.split("user=")[1];
-usernameText.innerHTML = userInfo.split(":::")[0];
-bioText.innerHTML = userInfo.split(":::")[1].split(":::")[0];
+usernameText.innerHTML = userInfo.split(":::")[0].replace(/\+/gi, " ");
+bioText.innerHTML = userInfo.split(":::")[1].split(":::")[0].replace(/\+/gi, " ");
 linkText.innerHTML = userInfo.split(":::")[2].split(":::")[0];
 emailText.innerHTML = userInfo.split(":::")[3].split(":::")[0];
 phoneText.innerHTML = userInfo.split(":::")[4].split(":::")[0];
