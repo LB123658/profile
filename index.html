@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -147,6 +148,36 @@ color: black;
 #info h2 p span {
 color: black;
 }
+#link {
+position: absolute;
+top: 280px;
+left: 50%;
+margin-left: 80px;
+height: 40px;
+width: 40px;
+border-radius: 50%;
+background: #16c946;
+border: none;
+cursor: pointer;
+z-index: -1;
+}
+#link span {
+color: white;
+margin: 5px 0px;
+}
+#link:hover {
+opacity: 0.9;
+}
+#url {
+width: 80%;
+font-size: 15px;
+color: #16c946;
+border: 2px solid #16c946;
+background: transparent;
+height: 25px;
+visibility: hidden;
+text-align: center;
+}
 </style>
 </head>
 <body>
@@ -172,7 +203,8 @@ color: black;
   <br>
   <br>
   <a target="_blank">Phone</a>
-  <br><br>
+  <br>
+  <input type="text" id="url" placeholder="Sharing link" autocomplete="off">
 </div>
 
 <div id="buttons">
@@ -186,6 +218,8 @@ color: black;
 </div>
 </div>
 
+<!-- get link info button -->
+<button id="link" onclick="link()"><span class="material-icons">share</span></button>
 
 <script>
 var usernameText = document.getElementsByTagName("h2")[0];
@@ -197,7 +231,8 @@ var phoneText = document.getElementsByTagName("a")[4];
 var info = document.getElementById("info");
 
 function save() {
-localStorage.setItem("web_profile",username.value + ":::" + bio.value + ":::" + link.value + ":::" + email.value + ":::" + phone.value);
+var identity = username.value + "///" + bio.value + "///" + link.value + "///" + email.value + "///" + phone.value;
+localStorage.setItem("web_profile",identity.replace(/ /gi,"+"));
 info.style.visibility = "hidden";
 }
 function edit() {
@@ -205,30 +240,36 @@ info.style.visibility = "visible";
 }
 if (localStorage.getItem("web_profile")) {
 var userInfo = localStorage.getItem("web_profile");
-usernameText.innerHTML = userInfo.split(":::")[0];
-bioText.innerHTML = userInfo.split(":::")[1].split(":::")[0];
-linkText.innerHTML = userInfo.split(":::")[2].split(":::")[0];
-emailText.innerHTML = userInfo.split(":::")[3].split(":::")[0];
-phoneText.innerHTML = userInfo.split(":::")[4].split(":::")[0];
-
-linkText.href = linkText.innerHTML = userInfo.split(":::")[2].split(":::")[0];
-emailText.href = "mailto:" + userInfo.split(":::")[3].split(":::")[0];
-phoneText.href = "tel:" + userInfo.split(":::")[4].split(":::")[0];
-} else {
+usernameText.innerHTML = userInfo.split("///")[0].replace(/\+/gi, " ");
+bioText.innerHTML = userInfo.split("///")[1].split("///")[0].replace(/\+/gi, " ");
+linkText.innerHTML = userInfo.split("///")[2].split("///")[0];
+emailText.innerHTML = userInfo.split("///")[3].split("///")[0];
+phoneText.innerHTML = userInfo.split("///")[4].split("///")[0];
+linkText.href = linkText.innerHTML = userInfo.split("///")[2].split("///")[0];
+emailText.href = "mailto:" + userInfo.split("///")[3].split("///")[0];
+phoneText.href = "tel:" + userInfo.split("///")[4].split("///")[0];
+} else if (location.search.length > 5) {
 var userInfo = location.search.split("user=")[1];
-usernameText.innerHTML = userInfo.split(":::")[0].replace(/\+/gi, " ");
-bioText.innerHTML = userInfo.split(":::")[1].split(":::")[0].replace(/\+/gi, " ");
-linkText.innerHTML = userInfo.split(":::")[2].split(":::")[0];
-emailText.innerHTML = userInfo.split(":::")[3].split(":::")[0];
-phoneText.innerHTML = userInfo.split(":::")[4].split(":::")[0];
-
-linkText.href = linkText.innerHTML = userInfo.split(":::")[2].split(":::")[0];
-emailText.href = "mailto:" + userInfo.split(":::")[3].split(":::")[0];
-phoneText.href = "tel:" + userInfo.split(":::")[4].split(":::")[0];
-} 
-
-if (window.location.href == "https://lb123658.github.io/profile/" && localStorage.getItem("web_profile").length < 5) {
+usernameText.innerHTML = userInfo.split("///")[0].replace(/\+/gi, " ");
+bioText.innerHTML = userInfo.split("///")[1].split("///")[0].replace(/\+/gi, " ");
+linkText.innerHTML = userInfo.split("///")[2].split("///")[0];
+emailText.innerHTML = userInfo.split("///")[3].split("///")[0];
+phoneText.innerHTML = userInfo.split("///")[4].split("///")[0];
+linkText.href = linkText.innerHTML = userInfo.split("///")[2].split("///")[0];
+emailText.href = "mailto:" + userInfo.split("///")[3].split("///")[0];
+phoneText.href = "tel:" + userInfo.split("///")[4].split("///")[0];
+} else {
 location.replace("https://lb123658.github.io/profile/edit");
+}
+
+function link() {
+var input = document.getElementById("url");
+  if (location.search.length < 5) {
+    input.value = "https://lb123658.github.io/profile?user=" + localStorage.getItem("web_profile");
+  } else {
+    input.value = window.location.href;
+  }
+  input.style.visibility = "visible";
 }
 </script>
 </body>
