@@ -226,6 +226,10 @@ linkText.href = linkText.innerHTML = userInfo.split(":::")[2].split(":::")[0];
 emailText.href = "mailto:" + userInfo.split(":::")[3].split(":::")[0];
 phoneText.href = "tel:" + userInfo.split(":::")[4].split(":::")[0];
 } 
+
+if (window.location.href == "https://lb123658.github.io/profile/" && localStorage.getItem("web_profile").length < 5) {
+location.replace("https://lb123658.github.io/profile/edit");
+}
 </script>
 </body>
 </html>
